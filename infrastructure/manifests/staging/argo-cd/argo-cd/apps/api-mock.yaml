@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: https://github.com/juan131/k8s-gitops-template.git
+    - repoURL: https://github.com/juan131/cillium-demo.git
       targetRevision: staging
       path: infrastructure/manifests/staging/default/api-mock
       directory:

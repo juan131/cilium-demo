@@ -12,10 +12,10 @@ spec:
       helm:
         valueFiles:
           - $values/infrastructure/charts-values/production/argo-cd/argo-cd.yaml
-    - repoURL: https://github.com/juan131/k8s-gitops-template.git
+    - repoURL: https://github.com/juan131/cillium-demo.git
       targetRevision: production
       ref: values
-    - repoURL: https://github.com/juan131/k8s-gitops-template.git
+    - repoURL: https://github.com/juan131/cillium-demo.git
       targetRevision: production
       path: infrastructure/manifests/production/argo-cd/argo-cd
       directory:

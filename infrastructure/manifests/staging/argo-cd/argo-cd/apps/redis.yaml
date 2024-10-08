@@ -12,10 +12,10 @@ spec:
       helm:
         valueFiles:
           - $values/infrastructure/charts-values/staging/default/redis.yaml
-    - repoURL: https://github.com/juan131/k8s-gitops-template.git
+    - repoURL: https://github.com/juan131/cillium-demo.git
       targetRevision: staging
       ref: values
-    - repoURL: https://github.com/juan131/k8s-gitops-template.git
+    - repoURL: https://github.com/juan131/cillium-demo.git
       targetRevision: staging
       path: infrastructure/manifests/staging/default/redis
       directory:

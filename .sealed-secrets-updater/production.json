@@ -1,0 +1,40 @@
+{
+  "kubesealConfig": {
+    "controllerNamespace": "kube-system",
+    "controllerName": "sealed-secrets-controller"
+  },
+  "secrets": [
+    {
+      "name": "argocd-secret",
+      "namespace": "argo-cd",
+      "input": {
+        "type": "file",
+        "config": {
+          "path": "infrastructure/secrets/production/argo-cd.yaml"
+        }
+      },
+      "output": {
+        "type": "file",
+        "config": {
+          "path": "infrastructure/manifests/production/argo-cd/argo-cd/argocd-sealed-secret.yaml"
+        }
+      }
+    },
+    {
+      "name": "api-mock-auth",
+      "namespace": "default",
+      "input": {
+        "type": "file",
+        "config": {
+          "path": "infrastructure/secrets/staging/api-mock.yaml"
+        }
+      },
+      "output": {
+        "type": "file",
+        "config": {
+          "path": "infrastructure/manifests/staging/default/api-mock/api-mock-sealed-secret.yaml"
+        }
+      }
+    }
+  ]
+}

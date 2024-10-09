@@ -6,8 +6,8 @@ metadata:
   labels:
     app.kubernetes.io/managed-by: argo-cd
     company/name: "casa de alba"
-    company/employee/name: pepe
-    company/employee/position: gardener
+    company/employee-name: pepe
+    company/employee-position: gardener
 spec:
   containers:
     - name: main

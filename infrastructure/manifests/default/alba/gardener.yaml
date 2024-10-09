@@ -5,7 +5,7 @@ metadata:
   namespace: default
   labels:
     app.kubernetes.io/managed-by: argo-cd
-    company/name: "casa de alba"
+    company/name: alba-house
     company/employee-name: pepe
     company/employee-position: gardener
 spec:

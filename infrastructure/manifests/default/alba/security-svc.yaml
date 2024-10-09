@@ -5,7 +5,7 @@ metadata:
   namespace: default
   labels:
     app.kubernetes.io/managed-by: argo-cd
-    company/name: "casa de alba"
+    company/name: alba-house
     company/system: security
 spec:
   type: ClusterIP
@@ -16,5 +16,5 @@ spec:
       protocol: TCP
       targetPort: http
   selector:
-    company/name: "casa de alba"
+    company/name: alba-house
     company/system: security

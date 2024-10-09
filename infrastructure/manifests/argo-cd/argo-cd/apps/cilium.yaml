@@ -4,7 +4,7 @@ metadata:
   name: cilium
   namespace: argo-cd
 spec:
-  project: cd
+  project: cilium
   sources:
     - repoURL: registry-1.docker.io/bitnamicharts
       chart: cilium

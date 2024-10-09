@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: security
+  namespace: default
+  labels:
+    app.kubernetes.io/managed-by: argo-cd
+    company/name: "casa de alba"
+    company/system: security
+spec:
+  selector:
+    matchLabels:
+      company/name: "casa de alba"
+      company/system: security
+  strategy:
+    rollingUpdate: {}
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        company/name: "casa de alba"
+        company/system: security
+    spec:
+      terminationGracePeriodSeconds: 5
+      containers:
+        - name: main
+          image: docker.io/juanariza131/api-mock:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: SUB_ROUTES
+              value: "/garden,/house"
+            - name: SUCCESS_RESP_BODY
+              value: "{\"access\": \"granted\"}"
+            - name: RATE_LIMIT
+              value: "100"
+            - name: RATE_EXCEEDED_RESP_BODY
+              value: "{\"error\": {\"code\": 200, \"message\": \"Rate limit exceeded\"}}"
+          ports:
+            - name: http
+              containerPort: 8080
+          startupProbe:
+            tcpSocket:
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /live
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: http
+          resources: {}

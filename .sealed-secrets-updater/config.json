@@ -19,22 +19,6 @@
           "path": "infrastructure/manifests/argo-cd/argo-cd/argocd-sealed-secret.yaml"
         }
       }
-    },
-    {
-      "name": "security-guard-auth",
-      "namespace": "default",
-      "input": {
-        "type": "file",
-        "config": {
-          "path": "infrastructure/secrets/security-guard.yaml"
-        }
-      },
-      "output": {
-        "type": "file",
-        "config": {
-          "path": "infrastructure/manifests/default/security-guard/security-guard-sealed-secret.yaml"
-        }
-      }
     }
   ]
 }

@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: security
+  namespace: default
+  labels:
+    app.kubernetes.io/managed-by: argo-cd
+    company/name: "casa de alba"
+    company/system: security
+spec:
+  type: ClusterIP
+  sessionAffinity: None
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: http
+  selector:
+    company/name: "casa de alba"
+    company/system: security

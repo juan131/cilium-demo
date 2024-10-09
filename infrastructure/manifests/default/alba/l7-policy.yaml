@@ -1,0 +1,23 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: security-l7-policy
+spec:
+  description: "L7 policy to restrict access to specific API endpoints"
+  endpointSelector:
+    matchLabels:
+      company/name: alba-house
+      company/system: security
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        company/name: alba-house
+        company/employee-position: duchess
+    toPorts:
+    - ports:
+      - port: "80"
+        protocol: TCP
+      rules:
+        http:
+        - method: GET
+          path: "/v1/mock/house"

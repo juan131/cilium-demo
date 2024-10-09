@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: agent-perez
+  namespace: default
+  labels:
+    app.kubernetes.io/managed-by: argo-cd
+    company/name: policia-nacional
+    company/employee-name: cristina
+    company/employee-position: sargent
+spec:
+  containers:
+    - name: main
+      image: docker.io/bitnami/os-shell:latest
+      imagePullPolicy: Always
+      command:
+        - sleep
+      args:
+        - infinity
+      resources: {}

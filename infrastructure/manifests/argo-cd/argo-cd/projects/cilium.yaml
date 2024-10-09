@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: cilium
+  namespace: argo-cd
+spec:
+  description: "Cilium services"
+  sourceRepos:
+    - https://github.com/juan131/cillium-demo.git
+    - registry-1.docker.io/bitnamicharts
+  destinations:
+    - namespace: cilium
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'

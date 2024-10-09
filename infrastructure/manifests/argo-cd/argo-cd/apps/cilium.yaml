@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cilium
+  namespace: argo-cd
+spec:
+  project: cd
+  sources:
+    - repoURL: registry-1.docker.io/bitnamicharts
+      chart: cilium
+      targetRevision: 1.2.4
+      helm:
+        valueFiles:
+          - $values/infrastructure/charts-values/cilium/cilium.yaml
+    - repoURL: https://github.com/juan131/cillium-demo.git
+      targetRevision: deployed
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: cilium
+  syncPolicy:
+    automated:
+      # Delete resources when Argo CD detects the resource is no longer defined in Git
+      prune: true
+    syncOptions:
+      # Ensures that namespace specified as the application destination exists in the destination cluster
+      - CreateNamespace=true
+      - PrunePropagationPolicy=foreground

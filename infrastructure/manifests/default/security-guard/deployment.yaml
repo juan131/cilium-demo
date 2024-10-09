@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api-mock
+  name: security-guard
   namespace: default
   labels:
-    app.kubernetes.io/name: api-mock
-    app.kubernetes.io/instance: api-mock
+    app.kubernetes.io/name: security-guard
+    app.kubernetes.io/instance: security-guard
     app.kubernetes.io/version: 0.0.1
     app.kubernetes.io/component: api
     app.kubernetes.io/managed-by: argo-cd
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/name: api-mock
-      app.kubernetes.io/instance: api-mock
+      app.kubernetes.io/name: security-guard
+      app.kubernetes.io/instance: security-guard
       app.kubernetes.io/component: api
   strategy:
     rollingUpdate: {}
@@ -21,8 +21,8 @@ spec:
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: api-mock
-        app.kubernetes.io/instance: api-mock
+        app.kubernetes.io/name: security-guard
+        app.kubernetes.io/instance: security-guard
         app.kubernetes.io/version: 0.0.1
         app.kubernetes.io/component: api
         app.kubernetes.io/managed-by: argo-cd
@@ -33,8 +33,8 @@ spec:
             - podAffinityTerm:
                 labelSelector:
                   matchLabels:
-                    app.kubernetes.io/name: api-mock
-                    app.kubernetes.io/instance: api-mock
+                    app.kubernetes.io/name: security-guard
+                    app.kubernetes.io/instance: security-guard
                 namespaces:
                   - default
                 topologyKey: kubernetes.io/hostname
@@ -43,28 +43,22 @@ spec:
         fsGroup: 1001
       terminationGracePeriodSeconds: 5
       containers:
-        - name: api-mock
+        - name: security-guard
           image: docker.io/juanariza131/api-mock:latest
           imagePullPolicy: IfNotPresent
           securityContext:
             runAsNonRoot: true
             runAsUser: 1001
           env:
-            - name: LOG_LEVEL
-              value: "debug"
             - name: API_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: api-mock-auth
+                  name: security-guard-auth
                   key: api-token
             - name: SUB_ROUTES
               value: "/foo,/bar"
-            - name: FAILURE_RESP_BODY
-              value: "{\"error\": {\"code\": 100, \"message\": \"Resource not found\"}}"
             - name: SUCCESS_RESP_BODY
-              value: "{\"success\": true}"
-            - name: SUCCESS_RATIO
-              value: "0.9"
+              value: "{\"access\": \"granted\", \"message\": \"Enjoy it!\"}"
             - name: RATE_LIMIT
               value: "100"
             - name: RATE_EXCEEDED_RESP_BODY

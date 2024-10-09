@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: api-mock
+  name: security-guard
   namespace: argo-cd
 spec:
   project: default
   sources:
     - repoURL: https://github.com/juan131/cillium-demo.git
       targetRevision: deployed
-      path: infrastructure/manifests/default/api-mock
+      path: infrastructure/manifests/default/security-guard
       directory:
         recurse: true
   destination:

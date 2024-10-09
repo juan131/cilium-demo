@@ -21,18 +21,18 @@
       }
     },
     {
-      "name": "api-mock-auth",
+      "name": "security-guard-auth",
       "namespace": "default",
       "input": {
         "type": "file",
         "config": {
-          "path": "infrastructure/secrets/api-mock.yaml"
+          "path": "infrastructure/secrets/security-guard.yaml"
         }
       },
       "output": {
         "type": "file",
         "config": {
-          "path": "infrastructure/manifests/default/api-mock/api-mock-sealed-secret.yaml"
+          "path": "infrastructure/manifests/default/security-guard/security-guard-sealed-secret.yaml"
         }
       }
     }

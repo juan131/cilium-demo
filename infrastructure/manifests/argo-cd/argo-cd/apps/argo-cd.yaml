@@ -1,32 +1,34 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: redis
+  name: argo-cd
   namespace: argo-cd
 spec:
-  project: default
+  project: cd
   sources:
     - repoURL: registry-1.docker.io/bitnamicharts
-      chart: redis
-      targetRevision: 18.1.0
+      chart: argo-cd
+      targetRevision: 5.1.3
       helm:
         valueFiles:
-          - $values/infrastructure/charts-values/staging/default/redis.yaml
+          - $values/infrastructure/charts-values/argo-cd/argo-cd.yaml
     - repoURL: https://github.com/juan131/cillium-demo.git
-      targetRevision: staging
+      targetRevision: deployed
       ref: values
     - repoURL: https://github.com/juan131/cillium-demo.git
-      targetRevision: staging
-      path: infrastructure/manifests/staging/default/redis
+      targetRevision: deployed
+      path: infrastructure/manifests/argo-cd/argo-cd
       directory:
         recurse: true
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: argo-cd
   syncPolicy:
     automated:
       # Delete resources when Argo CD detects the resource is no longer defined in Git
       prune: true
+      # Enable automatic sync when the live cluster's state deviates from the state defined in Git (only for Argo CD)
+      selfHeal: true
     syncOptions:
       # Ensures that namespace specified as the application destination exists in the destination cluster
       - CreateNamespace=true

@@ -1,16 +1,7 @@
 name: Update tag
 
 on:
-  workflow_dispatch:
-    inputs:
-      stage:
-        description: Stage to deploy
-        required: true
-        default: staging
-        type: choice
-        options:
-          - staging
-          - production
+  workflow_dispatch: {}
 
 jobs:
   create-tag:
@@ -31,7 +22,7 @@ jobs:
       - name: Create unique timestamped tag
         shell: bash
         env:
-          TAG: ${{ github.event.inputs.stage }}-${{ steps.timestamp.outputs.time }}
+          TAG: deployed-${{ steps.timestamp.outputs.time }}
         run: |
           git config user.name "$GITHUB_ACTOR"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
@@ -41,7 +32,7 @@ jobs:
       - name: Update stable tag reference
         shell: bash
         env:
-          TAG: ${{ github.event.inputs.stage }}
+          TAG: deployed
         run: |
           git config user.name "$GITHUB_ACTOR"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"

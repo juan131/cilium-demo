@@ -1,23 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: sealed-secrets
+  name: api-mock
   namespace: argo-cd
 spec:
-  project: cd
+  project: default
   sources:
-    - repoURL: registry-1.docker.io/bitnamicharts
-      chart: sealed-secrets
-      targetRevision: 1.5.3
-      helm:
-        valueFiles:
-          - $values/infrastructure/charts-values/production/kube-system/sealed-secrets.yaml
     - repoURL: https://github.com/juan131/cillium-demo.git
-      targetRevision: production
-      ref: values
+      targetRevision: deployed
+      path: infrastructure/manifests/default/api-mock
+      directory:
+        recurse: true
   destination:
     server: https://kubernetes.default.svc
-    namespace: kube-system
+    namespace: default
   syncPolicy:
     automated:
       # Delete resources when Argo CD detects the resource is no longer defined in Git

@@ -13,7 +13,6 @@ set -o pipefail
 
 # Constants
 RESET='\033[0m'
-GREEN='\033[38;5;2m'
 RED='\033[38;5;1m'
 YELLOW='\033[38;5;3m'
 
@@ -30,31 +29,21 @@ print_menu() {
     log "    $(basename -s .sh "${BASH_SOURCE[0]}")"
     log ""
     log "${RED}SYNOPSIS${RESET}"
-    log "    $script [${YELLOW}-h${RESET}] [${YELLOW}-t ${GREEN}\"target\"${RESET}]"
+    log "    $script [${YELLOW}-h${RESET}]"
     log ""
     log "${RED}DESCRIPTION${RESET}"
     log "    Script to update charts versions."
     log ""
-    log "    The options are as follow:"
-    log ""
-    log "      ${YELLOW}-t, --target ${GREEN}[target]${RESET}                           Target to use (staging or production)."
-    log ""
     log "${RED}EXAMPLES${RESET}"
     log "      $script --help"
-    log "      $script --target \"staging\""
-    log "      $script --target \"production\""
     log ""
 }
 
-target="staging"
 help_menu=0
 while [[ "$#" -gt 0 ]]; do
     case "$1" in
         -h|--help)
             help_menu=1
-            ;;
-        -t|--target)
-            shift; target="${1:?missing target}"
             ;;
         *)
             log "Invalid command line flag $1" >&2
@@ -63,11 +52,6 @@ while [[ "$#" -gt 0 ]]; do
     esac
     shift
 done
-
-if [[ "$target" != "production" ]] && [[ "$target" != "staging" ]]; then
-    log "Allowed targets are: \"production\" and \"staging\". Found: $target"
-    help_menu=1
-fi
 
 if [[ "$help_menu" -eq 1 ]]; then
     print_menu
@@ -93,4 +77,4 @@ update_chart_version() {
 }
 export -f update_chart_version
 
-find "infrastructure/manifests/${target}/argo-cd/argo-cd/apps" -name '*.yaml' -print0 | xargs -0 -I {} bash -c 'update_chart_version "$@"' _ {}
+find "infrastructure/manifests/argo-cd/argo-cd/apps" -name '*.yaml' -print0 | xargs -0 -I {} bash -c 'update_chart_version "$@"' _ {}

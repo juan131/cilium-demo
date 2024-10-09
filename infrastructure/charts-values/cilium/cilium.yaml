@@ -9,6 +9,7 @@ agent:
     runAsUser: 0
     allowPrivilegeEscalation: true
     privileged: true
+  priorityClassName: ""
   metrics:
     enabled: true
 operator:

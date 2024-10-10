@@ -11,7 +11,7 @@ spec:
       targetRevision: 1.2.4
       helm:
         valueFiles:
-          - $values/infrastructure/charts-values/cilium/cilium.yaml
+          - $values/infrastructure/charts-values/kube-system/cilium.yaml
     - repoURL: https://github.com/juan131/cillium-demo.git
       targetRevision: deployed
       ref: values

@@ -30,7 +30,7 @@ spec:
             - name: METHODS
               value: "GET"
             - name: SUB_ROUTES
-              value: "/garden,/house"
+              value: "/garden,/house,/strongbox"
             - name: SUCCESS_RESP_BODY
               value: "{\"access\": \"granted\"}"
           ports:

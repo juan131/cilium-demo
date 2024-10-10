@@ -1,0 +1,38 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: security-policy
+spec:
+  description: "L7 policy to restrict Alba House access to certain employees"
+  endpointSelector:
+    matchLabels:
+      company/name: alba-house
+      company/system: security
+  ingress:
+  - fromEndpoints:
+    - matchLabels:
+        company/name: alba-house
+    toPorts:
+    - ports:
+      - port: "8080"
+        protocol: TCP
+      rules:
+        http:
+        - method: GET
+          path: "/v1/mock/garden"
+  - fromEndpoints:
+    - matchLabels:
+        company/name: alba-house
+        company/employee-position: duchess
+    toPorts:
+    - ports:
+      - port: "8080"
+        protocol: TCP
+      rules:
+        http:
+        - method: GET
+          path: "/v1/mock/house"
+        - method: GET
+          path: "/v1/mock/strongbox"
+          headers:
+          - 'X-API-KEY: vivaerbetis'

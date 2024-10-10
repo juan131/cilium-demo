@@ -125,6 +125,18 @@ It's also possible to inspect the traffic using the [Hubble CLI](https://docs.ci
 - Download the TLS client certificate and key to your local machine:
 
 ```bash
+kubectl get secret -n kube-system cilium-hubble-relay-client-crt -o json | jq -r '.data["tls.crt"]' | base64 --decode > tls.crt
+kubectl get secret -n kube-system cilium-hubble-relay-client-crt -o json | jq -r '.data["tls.key"]' | base64 --decode > tls.key
 ```
 
-TODO: COMPLETE
+- Port-forward the Hubble Relay service to your local machine:
+
+```bash
+kubectl port-forward svc/cilium-hubble-relay 4245:4245 -n kube-system
+```
+
+- Use the Hubble CLI to inspect the traffic:
+
+```bash
+hubble observe --tls --tls-allow-insecure --tls-client-cert-file tls.crt --tls-client-key-file tls.key
+```

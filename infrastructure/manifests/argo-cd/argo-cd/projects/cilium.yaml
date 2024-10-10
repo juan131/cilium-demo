@@ -9,7 +9,7 @@ spec:
     - https://github.com/juan131/cillium-demo.git
     - registry-1.docker.io/bitnamicharts
   destinations:
-    - namespace: cilium
+    - namespace: kube-system
       server: https://kubernetes.default.svc
   clusterResourceWhitelist:
     - group: '*'

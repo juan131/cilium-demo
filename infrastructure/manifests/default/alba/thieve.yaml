@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: agent-perez
+  name: tejado
   namespace: default
   labels:
     app.kubernetes.io/managed-by: argo-cd
-    company/name: policia-nacional
-    company/employee-name: cristina
-    company/employee-position: sargent
+    company/name: unknown
+    company/employee-name: antonio
+    company/employee-position: capo
 spec:
   containers:
     - name: main

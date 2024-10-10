@@ -17,7 +17,7 @@ spec:
       ref: values
   destination:
     server: https://kubernetes.default.svc
-    namespace: cilium
+    namespace: kube-system
   syncPolicy:
     automated:
       # Delete resources when Argo CD detects the resource is no longer defined in Git

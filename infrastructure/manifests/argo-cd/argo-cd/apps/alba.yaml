@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   sources:
-    - repoURL: https://github.com/juan131/cillium-demo.git
+    - repoURL: https://github.com/juan131/cilium-demo.git
       targetRevision: deployed
       path: infrastructure/manifests/default/alba
       directory:

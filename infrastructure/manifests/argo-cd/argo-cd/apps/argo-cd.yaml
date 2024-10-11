@@ -12,10 +12,10 @@ spec:
       helm:
         valueFiles:
           - $values/infrastructure/charts-values/argo-cd/argo-cd.yaml
-    - repoURL: https://github.com/juan131/cillium-demo.git
+    - repoURL: https://github.com/juan131/cilium-demo.git
       targetRevision: deployed
       ref: values
-    - repoURL: https://github.com/juan131/cillium-demo.git
+    - repoURL: https://github.com/juan131/cilium-demo.git
       targetRevision: deployed
       path: infrastructure/manifests/argo-cd/argo-cd
       directory:

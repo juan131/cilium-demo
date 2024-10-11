@@ -6,7 +6,7 @@ metadata:
 spec:
   description: "Cilium services"
   sourceRepos:
-    - https://github.com/juan131/cillium-demo.git
+    - https://github.com/juan131/cilium-demo.git
     - registry-1.docker.io/bitnamicharts
   destinations:
     - namespace: kube-system

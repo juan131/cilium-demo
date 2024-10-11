@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana-operator
+  namespace: argo-cd
+spec:
+  project: monitoring
+  sources:
+    - repoURL: registry-1.docker.io/bitnamicharts
+      chart: grafana-operator
+      targetRevision: 4.7.3
+      helm:
+        valueFiles:
+          - $values/infrastructure/charts-values/monitoring/grafana-operator.yaml
+    - repoURL: https://github.com/juan131/cilium-demo.git
+      targetRevision: deployed
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
+  syncPolicy:
+    automated:
+      # Delete resources when Argo CD detects the resource is no longer defined in Git
+      prune: true
+    syncOptions:
+      # Ensures that namespace specified as the application destination exists in the destination cluster
+      - CreateNamespace=true
+      - PrunePropagationPolicy=foreground

@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: monitoring
+  namespace: argo-cd
+spec:
+  description: "Monitoring services"
+  sourceRepos:
+    - https://github.com/juan131/cilium-demo.git
+    - registry-1.docker.io/bitnamicharts
+  destinations:
+    - namespace: monitoring
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'

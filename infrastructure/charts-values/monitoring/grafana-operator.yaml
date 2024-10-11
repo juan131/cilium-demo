@@ -1,0 +1,45 @@
+operator:
+  scanNamespaces:
+    - monitoring
+grafana:
+  enabled: true
+extraDeploy:
+  # Data Sources
+  - apiVersion: integreatly.org/v1alpha1
+    kind: GrafanaDataSource
+    metadata:
+      name: prometheus
+      namespace: monitoring
+      labels:
+        app.kubernetes.io/instance: '{{ .Release.Name }}'
+        app.kubernetes.io/name: '{{ include "common.names.name" . }}'
+    spec:
+      name: prometheus.yaml
+      datasources:
+        - name: Prometheus
+          type: prometheus
+          access: proxy
+          url: http://kube-prometheus-prometheus.monitoring.svc.cluster.local:9090
+          isDefault: true
+          version: 1
+          editable: true
+          basicAuth: false
+          withCredentials: false
+          jsonData:
+            tlsAuth: false
+            tlsAuthWithCACert: false
+            tlsSkipVerify: true
+  # Dashboards
+  - apiVersion: integreatly.org/v1alpha1
+    kind: GrafanaDashboard
+    metadata:
+      name: cilium
+      namespace: monitoring
+      labels:
+        app.kubernetes.io/instance: '{{ .Release.Name }}'
+        app.kubernetes.io/name: '{{ include "common.names.name" . }}'
+    spec:
+      url: https://raw.githubusercontent.com/cilium/cilium/refs/heads/main/install/kubernetes/cilium/files/cilium-agent/dashboards/cilium-dashboard.json
+      datasources:
+        - inputName: "DS_PROMETHEUS"
+          datasourceName: "Prometheus"

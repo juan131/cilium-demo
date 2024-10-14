@@ -26,3 +26,6 @@ spec:
       # Ensures that namespace specified as the application destination exists in the destination cluster
       - CreateNamespace=true
       - PrunePropagationPolicy=foreground
+      # kube-prometheus crd specs are too big and they don't fit into 'kubectl.kubernetes.io/last-applied-configuration' annotation
+      # ref: https://argo-cd.readthedocs.io/en/stable/user-guide/sync-options/#replace-resource-instead-of-applying-changes
+      - Replace=true

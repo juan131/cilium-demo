@@ -1,3 +1,5 @@
+commonLabels:
+  k8s_app: cilium
 # Disable secret creation since we are using an existing secret
 config:
   secret:

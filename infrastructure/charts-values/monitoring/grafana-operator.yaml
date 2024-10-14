@@ -5,7 +5,7 @@ grafana:
   enabled: true
 extraDeploy:
   # Data Sources
-  - apiVersion: integreatly.org/v1alpha1
+  - apiVersion: grafana.integreatly.org/v1beta1
     kind: GrafanaDataSource
     metadata:
       name: prometheus
@@ -30,7 +30,7 @@ extraDeploy:
             tlsAuthWithCACert: false
             tlsSkipVerify: true
   # Dashboards
-  - apiVersion: integreatly.org/v1alpha1
+  - apiVersion: grafana.integreatly.org/v1beta1
     kind: GrafanaDashboard
     metadata:
       name: cilium

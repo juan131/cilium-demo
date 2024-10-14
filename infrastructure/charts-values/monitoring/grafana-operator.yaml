@@ -14,21 +14,20 @@ extraDeploy:
         app.kubernetes.io/instance: '{{ .Release.Name }}'
         app.kubernetes.io/name: '{{ include "common.names.name" . }}'
     spec:
-      name: prometheus.yaml
-      datasources:
-        - name: Prometheus
-          type: prometheus
-          access: proxy
-          url: http://kube-prometheus-prometheus.monitoring.svc.cluster.local:9090
-          isDefault: true
-          version: 1
-          editable: true
-          basicAuth: false
-          withCredentials: false
-          jsonData:
-            tlsAuth: false
-            tlsAuthWithCACert: false
-            tlsSkipVerify: true
+      instanceSelector:
+        matchLabels:
+          app.kubernetes.io/instance: '{{ .Release.Name }}'
+          app.kubernetes.io/name: '{{ include "common.names.name" . }}'
+      datasource:
+        name: Prometheus
+        type: prometheus
+        access: proxy
+        url: http://kube-prometheus-prometheus.monitoring.svc.cluster.local:9090
+        isDefault: true
+        editable: true
+        basicAuth: false
+        jsonData:
+          tlsSkipVerify: true
   # Dashboards
   - apiVersion: grafana.integreatly.org/v1beta1
     kind: GrafanaDashboard
@@ -39,6 +38,10 @@ extraDeploy:
         app.kubernetes.io/instance: '{{ .Release.Name }}'
         app.kubernetes.io/name: '{{ include "common.names.name" . }}'
     spec:
+      instanceSelector:
+        matchLabels:
+          app.kubernetes.io/instance: '{{ .Release.Name }}'
+          app.kubernetes.io/name: '{{ include "common.names.name" . }}'
       url: https://raw.githubusercontent.com/cilium/cilium/refs/heads/main/install/kubernetes/cilium/files/cilium-agent/dashboards/cilium-dashboard.json
       datasources:
         - inputName: "DS_PROMETHEUS"

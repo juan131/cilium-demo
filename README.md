@@ -14,6 +14,7 @@ A sample K8s project template following GitOps mindset.
   - [Cilium Components](#cilium-components)
   - [Alba House example](#alba-house-example)
   - [Observability](#observability)
+  - [Metrics](#metrics)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -140,3 +141,24 @@ kubectl port-forward svc/cilium-hubble-relay 4245:4245 -n kube-system
 ```bash
 hubble observe --tls --tls-allow-insecure --tls-client-cert-file tls.crt --tls-client-key-file tls.key
 ```
+
+## Metrics
+
+Cilium exposes metrics in Prometheus format which can be scraped by Prometheus. This repo contains the required manifests to setup kube-prometheus stack and Grafana Operator to visualize the metrics. These manifests include the ServiceMonitor objects and GrafanaDatasource objects to automatically discover and scrape the Cilium metrics.
+You can also find a [Grafana dashboard](./dashboards/cilium.json) to visualize the Cilium metrics.
+
+To access the Grafana UI:
+
+- Obtain the Grafana admin password:
+
+```bash
+kubectl get secret -n monitoring grafana-operator-grafana-admin-credentials -o json | jq -r .data.GF_SECURITY_ADMIN_PASSWORD | base64 --decode
+```
+
+- Port-forward the Grafana service to your local machine:
+
+```bash
+kubectl port-forward svc/grafana-operator-grafana-service 3000:3000 -n monitoring
+```
+
+- Open your browser and navigate to [http://localhost:3000](http://localhost:3000) and login with the admin user and password obtained in the previous step.

@@ -42,7 +42,7 @@ extraDeploy:
         matchLabels:
           app.kubernetes.io/instance: '{{ .Release.Name }}'
           app.kubernetes.io/name: '{{ include "common.names.name" . }}'
-      url: https://raw.githubusercontent.com/cilium/cilium/refs/heads/main/install/kubernetes/cilium/files/cilium-agent/dashboards/cilium-dashboard.json
+      url: https://raw.githubusercontent.com/juan131/cilium-demo/refs/heads/main/dashboards/cilium.json
       datasources:
         - inputName: "DS_PROMETHEUS"
           datasourceName: "Prometheus"

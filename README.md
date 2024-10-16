@@ -1,4 +1,4 @@
-# Cilium demno
+# Cilium demo
 
 Get started with Cilium and L7 Network Policies.
 
@@ -7,7 +7,7 @@ Get started with Cilium and L7 Network Policies.
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [Cilium demno](#cilium-demno)
+- [Cilium demo](#cilium-demo)
   - [Table of Contents](#table-of-contents)
   - [Prerequisites](#prerequisites)
     - [Setup](#setup)

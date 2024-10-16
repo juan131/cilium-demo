@@ -55,14 +55,14 @@ This is an illustrative example of to understand the power of Cilium Network Pol
 - A "security system" (implemented as a REST API server) that provides access to different zones of Duenas' palace.
 - The "duchess", (implemented as a REST client) who can access every zone in the palace, but can only access the "strongbox" when carrying the "key".
 - The "gardener", (implemented as a REST client) who can exclusively access the "garden".
-- The "thieve", (implemented as a REST client) who cannot access any zone in the palace.
+- The "thief", (implemented as a REST client) who cannot access any zone in the palace.
 
 The security system is a dumb system developed by the Mossos d'Esquadra in charge of arresting Puidgemont, and we've recently discovered that it grants access to everyone, so we've decided to secure it with Cilium Network Policies.
 
 Given the urgency of the situation, 1st we implemented an L3/L4 network policy to block all traffic to the security system unless it comes from "Alba House" employees. To do so:
 
 - Apply the [L3/L4 network policy](./networkpolicies/l3-l4-policy.yaml).
-- Test the network policy by trying to access the security system from the "thieve" pod.
+- Test the network policy by trying to access the security system from the "thief" pod.
 
 ```bash
 $ kubectl exec tejado -- curl -sX GET http://security/v1/mock/house

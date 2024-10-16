@@ -1,13 +1,13 @@
-# GitOps on Kubernetes
+# Cilium demno
 
-A sample K8s project template following GitOps mindset.
+Get started with Cilium and L7 Network Policies.
 
 ## Table of Contents
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [GitOps on Kubernetes](#gitops-on-kubernetes)
+- [Cilium demno](#cilium-demno)
   - [Table of Contents](#table-of-contents)
   - [Prerequisites](#prerequisites)
     - [Setup](#setup)
